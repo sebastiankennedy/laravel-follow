@@ -1,0 +1,63 @@
+{
+    "name": "sebastian-kennedy\/laravel-follower",
+    "description": "User follower feature for laravel application.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SebastianKennedy",
+            "email": "sebastiankennedy@foxmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SebastianKennedy\\LaravelFollower\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SebastianKennedy\\LaravelFollower\\Tests": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.2.5",
+        "laravel/framework": "^6.0|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2",
+        "mockery/mockery": "^1.4",
+        "orchestra/testbench": "^5.3",
+        "brainmaestro/composer-git-hooks": "^2.8",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SebastianKennedy\\LaravelFollower\\FollowerServiceProvider"
+            ]
+        },
+        "hooks": {
+            "pre-commit": [
+                "composer test",
+                "composer fix-code-style"
+            ],
+            "pre-push": [
+                "composer test",
+                "composer check-code-style"
+            ]
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "cghooks update"
+        ],
+        "post-merge": "composer install",
+        "post-install-cmd": [
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "test": "vendor/bin/phpunit --colors=always --coverage-clover=./coverage.xml",
+        "cghooks": "vendor/bin/cghooks",
+        "fix-code-style": "php-cs-fixer fix --using-cache=no --config=.php_cs --ansi",
+        "check-code-style": "php-cs-fixer fix --using-cache=no --diff --config=.php_cs --dry-run --ansi"
+    }
+}
