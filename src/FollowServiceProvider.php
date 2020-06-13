@@ -4,7 +4,7 @@ namespace SebastianKennedy\LaravelFollower;
 
 use Illuminate\Support\ServiceProvider;
 
-class FollowerServiceProvider extends ServiceProvider
+class FollowServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -18,6 +18,6 @@ class FollowerServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__) . '/config/follower.php', 'follower');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/config/follow.php', 'follower');
     }
 }

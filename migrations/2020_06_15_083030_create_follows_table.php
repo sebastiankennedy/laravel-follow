@@ -23,17 +23,21 @@ class CreateFollowsTable extends Migration
     public function up()
     {
         Schema::create(
-            config('follower.table_name'),
+            config('follow.table_name'),
             function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->unsignedBigInteger('follower_id');
-                $table->string('follower_type');
-                $table->string('followable_id');
-                $table->string('followable_type');
+                $table->unsignedBigInteger(config('follow.foreign_morph_to_many_id'));
+                $table->string(config('follow.foreign_morph_to_many_type'));
+                $table->unsignedBigInteger(config('follow.morph_to_many_id'));
+                $table->string(config('follow.morph_to_many_type'));
                 $table->timestamp('accepted_at')->nullable();
                 $table->timestamp('rejected_at')->nullable();
+                $table->timestamp('special_followed_at')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
+
+                $table->index([config('follow.morph_to_many_id'), config('follow.morph_to_many_type')]);
+                $table->index([config('follow.foreign_morph_to_many_id'), config('follow.foreign_morph_to_many_type')]);
             }
         );
     }
@@ -43,6 +47,6 @@ class CreateFollowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('follower.table_name'));
+        Schema::dropIfExists(config('follow.table_name'));
     }
 }

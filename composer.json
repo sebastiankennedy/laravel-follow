@@ -1,6 +1,6 @@
 {
-    "name": "sebastian-kennedy\/laravel-follower",
-    "description": "User follower feature for laravel application.",
+    "name": "sebastian-kennedy\/laravel-follow",
+    "description": "User follow feature for laravel application.",
     "license": "MIT",
     "authors": [
         {
