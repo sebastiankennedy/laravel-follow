@@ -10,12 +10,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "SebastianKennedy\\LaravelFollower\\": "src"
+            "SebastianKennedy\\LaravelFollow\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SebastianKennedy\\LaravelFollower\\Tests": "tests"
+            "SebastianKennedy\\LaravelFollow\\Tests\\": "tests"
         }
     },
     "require": {
@@ -32,7 +32,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SebastianKennedy\\LaravelFollower\\FollowerServiceProvider"
+                "SebastianKennedy\\LaravelFollow\\FollowServiceProvider"
             ]
         },
         "hooks": {
