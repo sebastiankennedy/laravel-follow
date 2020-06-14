@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1592099078">
-  <project timestamp="1592099078">
-    <package name="SebastianKennedy\LaravelFollower">
+<coverage generated="1592099612">
+  <project timestamp="1592099612">
+    <package name="SebastianKennedy\LaravelFollow">
       <file name="/Users/sebastian/Code/Composer/laravel-follow/src/Events/FollowedEvent.php">
-        <class name="SebastianKennedy\LaravelFollower\FollowedEvent" namespace="SebastianKennedy\LaravelFollower">
+        <class name="SebastianKennedy\LaravelFollow\FollowedEvent" namespace="SebastianKennedy\LaravelFollow">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="15" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
       <file name="/Users/sebastian/Code/Composer/laravel-follow/src/Follow.php">
-        <class name="SebastianKennedy\LaravelFollower\Follow" namespace="SebastianKennedy\LaravelFollower">
+        <class name="SebastianKennedy\LaravelFollow\Follow" namespace="SebastianKennedy\LaravelFollow">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="19" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
       <file name="/Users/sebastian/Code/Composer/laravel-follow/src/FollowServiceProvider.php">
-        <class name="SebastianKennedy\LaravelFollower\FollowServiceProvider" namespace="SebastianKennedy\LaravelFollower">
+        <class name="SebastianKennedy\LaravelFollow\FollowServiceProvider" namespace="SebastianKennedy\LaravelFollow">
           <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="12" coveredelements="0"/>
         </class>
         <line num="17" type="method" name="boot" visibility="public" complexity="2" crap="6" count="0"/>

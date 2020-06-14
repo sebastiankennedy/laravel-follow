@@ -26,16 +26,13 @@ class CreateFollowsTable extends Migration
             config('follow.table_name'),
             function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->unsignedBigInteger(config('follow.foreign_morph_to_many_id'));
-                $table->string(config('follow.foreign_morph_to_many_type'));
-                $table->unsignedBigInteger(config('follow.morph_to_many_id'));
-                $table->string(config('follow.morph_to_many_type'));
+                $table->morphs(config('follow.morph_to_many_name'));
+                $table->morphs(config('follow.foreign_morph_to_many_name'));
                 $table->timestamp('accepted_at')->nullable();
                 $table->timestamp('rejected_at')->nullable();
                 $table->timestamp('special_followed_at')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
-
                 $table->index([config('follow.morph_to_many_id'), config('follow.morph_to_many_type')]);
                 $table->index([config('follow.foreign_morph_to_many_id'), config('follow.foreign_morph_to_many_type')]);
             }
