@@ -11,6 +11,7 @@
 namespace SebastianKennedy\LaravelFollow;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -28,4 +29,20 @@ class Follow extends Model
         'created' => FollowedEvent::class,
         'deleted' => UnFollowedEvent::class,
     ];
+
+    /**
+     * @return MorphTo
+     */
+    public function follower()
+    {
+        return $this->morphTo(config('follow.foreign_morph_to_name'));
+    }
+
+    /**
+     * @return MorphTo
+     */
+    public function following()
+    {
+        return $this->morphTo(config('follow.morph_to_name'));
+    }
 }
