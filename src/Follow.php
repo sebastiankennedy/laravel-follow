@@ -15,9 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Follow
- *
- * @package SebastianKennedy\LaravelFollow
+ * Class Follow.
  */
 class Follow extends Model
 {
