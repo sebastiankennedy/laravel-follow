@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the sebastian-kennedy/laravel-like.
+ * This file is part of the sebastian-kennedy/laravel-follow.
  *
  * (c) SebastianKennedy <sebastiankennedy@foxmail.com>
  *
@@ -13,7 +13,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateFollowsTable
+ * Class CreateFollowsTable.
  */
 class CreateFollowsTable extends Migration
 {
