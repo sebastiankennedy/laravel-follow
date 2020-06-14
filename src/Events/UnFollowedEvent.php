@@ -12,4 +12,10 @@ namespace SebastianKennedy\LaravelFollow;
 
 class UnFollowedEvent
 {
+    protected $follow;
+
+    public function __construct(Follow $follow)
+    {
+        $this->follow = $follow;
+    }
 }
