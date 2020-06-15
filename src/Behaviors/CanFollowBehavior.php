@@ -16,25 +16,22 @@ trait CanFollowBehavior
 {
     public function follows()
     {
-        return $this->morphMany(config('follow.model'), config('follow.foreign_morph_to_name'));
+        return $this->hasMany(config('follow.model'), config('follow.follower_key'), $this->getKeyName());
     }
 
     public function hasFollowed(Model $model)
     {
         return ($this->relationLoaded('follows') ? $this->follows : $this->follows())
-                ->where(config('follow.morph_to_id'), $model->getKey())
-                ->where(config('follow.morph_to_type'), $model->getMorphClass())
+                ->where(config('follow.following_key'), $model->getKey())
                 ->count() > 0;
     }
 
-    public function follow(Model $model)
+    public function follow(Model $user)
     {
-        if (!$this->hasFollowed($model)) {
+        if (!$this->hasFollowed($user)) {
             $follow = app(config('follow.model'));
-            $follow->{config('follow.morph_to_id')} = $model->getKey();
-            $follow->{config('follow.morph_to_type')} = $model->getMorphClass();
-            $follow->{config('follow.foreign_morph_to_id')} = $this->getKey();
-            $follow->{config('follow.foreign_morph_to_type')} = $this->getMorphClass();
+            $follow->{config('follow.follower_key')} = $this->getKey();
+            $follow->{config('follow.following_key')} = $user->getKey();
 
             return $this->follows()->save($follow);
         }
@@ -42,17 +39,15 @@ trait CanFollowBehavior
         return null;
     }
 
-    public function unFollow(Model $model)
+    public function unFollow(Model $user)
     {
         $relation = $this->follows()
-            ->where(config('follow.morph_to_id'), $model->getKey())
-            ->where(config('follow.morph_to_type'), $model->getMorphClass())
-            ->where(config('follow.foreign_morph_to_id'), $this->getKey())
-            ->where(config('follow.foreign_morph_to_type'), $this->getMorphClass())
-            ->find();
+            ->where(config('follow.follower_key'), $this->getKey())
+            ->where(config('follow.following_key'), $user->getKey())
+            ->first();
 
         if ($relation) {
-            return $relation->delete($relation);
+            return $relation->delete();
         }
 
         return null;
