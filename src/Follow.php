@@ -12,14 +12,14 @@ namespace SebastianKennedy\LaravelFollow;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use SebastianKennedy\LaravelFollow\Events\FollowedEvent;
+use SebastianKennedy\LaravelFollow\Events\UnFollowedEvent;
 
 /**
  * Class Follow.
  */
 class Follow extends Model
 {
-    use SoftDeletes;
     /**
      * @var array
      */

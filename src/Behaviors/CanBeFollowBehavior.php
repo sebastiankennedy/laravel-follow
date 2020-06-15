@@ -16,7 +16,7 @@ trait CanBeFollowBehavior
 {
     public function follows()
     {
-        return $this->morphMany(config('follow.model'), config('follow.morph_to_name'));
+        return $this->hasMany(config('follow.model'), config('follow.following_key'), $this->getKeyName());
     }
 
     public function isFollowedBy(Model $model)

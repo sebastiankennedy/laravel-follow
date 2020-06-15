@@ -14,9 +14,23 @@ use Illuminate\Database\Eloquent\Model;
 
 trait CanFollowBehavior
 {
+    public function followings()
+    {
+        return $this->belongsToMany(
+            config('auth.providers.users.model'),
+            config('follow.table_name'),
+            config('follow.follower_key'),
+            config('follow.following_key')
+        );
+    }
+
     public function follows()
     {
-        return $this->hasMany(config('follow.model'), config('follow.follower_key'), $this->getKeyName());
+        return $this->hasMany(
+            config('follow.model'),
+            config('follow.follower_key'),
+            $this->getKeyName()
+        );
     }
 
     public function hasFollowed(Model $model)
@@ -32,8 +46,10 @@ trait CanFollowBehavior
             $follow = app(config('follow.model'));
             $follow->{config('follow.follower_key')} = $this->getKey();
             $follow->{config('follow.following_key')} = $user->getKey();
+            $this->follows()->save($follow);
+            $this->refresh();
 
-            return $this->follows()->save($follow);
+            return $follow;
         }
 
         return null;
@@ -47,7 +63,10 @@ trait CanFollowBehavior
             ->first();
 
         if ($relation) {
-            return $relation->delete();
+            $result = $relation->delete();
+            $this->refresh();
+
+            return $result;
         }
 
         return null;

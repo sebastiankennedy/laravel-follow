@@ -8,7 +8,9 @@
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace SebastianKennedy\LaravelFollow;
+namespace SebastianKennedy\LaravelFollow\Events;
+
+use SebastianKennedy\LaravelFollow\Follow;
 
 class FollowedEvent
 {

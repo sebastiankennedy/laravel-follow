@@ -32,7 +32,6 @@ class CreateFollowsTable extends Migration
                 $table->timestamp('rejected_at')->nullable();
                 $table->timestamp('special_followed_at')->nullable();
                 $table->timestamps();
-                $table->softDeletes();
             }
         );
     }
