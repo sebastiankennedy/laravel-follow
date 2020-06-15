@@ -11,7 +11,7 @@
 namespace SebastianKennedy\LaravelFollow;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -29,18 +29,18 @@ class Follow extends Model
     ];
 
     /**
-     * @return MorphTo
+     * @return BelongsTo
      */
     public function follower()
     {
-        return $this->morphTo(config('follow.foreign_morph_to_name'));
+        return $this->belongsTo(config('auth.providers.users.model'), config('follow.follower_key'));
     }
 
     /**
-     * @return MorphTo
+     * @return BelongsTo
      */
     public function following()
     {
-        return $this->morphTo(config('follow.morph_to_name'));
+        return $this->belongsTo(config('auth.providers.users.model'), config('follow.following_key'));
     }
 }
