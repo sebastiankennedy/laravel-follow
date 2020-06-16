@@ -13,8 +13,16 @@ namespace SebastianKennedy\LaravelFollow\Behaviors;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Trait CanBeFollowBehavior
+ *
+ * @package SebastianKennedy\LaravelFollow\Behaviors
+ */
 trait CanBeFollowBehavior
 {
+    /**
+     * @return mixed
+     */
     public function followers()
     {
         return $this->belongsToMany(
@@ -25,6 +33,9 @@ trait CanBeFollowBehavior
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function followable()
     {
         return $this->hasMany(
@@ -34,6 +45,11 @@ trait CanBeFollowBehavior
         );
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return bool
+     */
     public function isFollowedBy(Model $user)
     {
         if ($this->relationLoaded('followers')) {
@@ -45,6 +61,11 @@ trait CanBeFollowBehavior
                 ->count() > 0;
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return mixed
+     */
     public function acceptFollow(Model $user)
     {
         return $this->followable()
@@ -52,6 +73,11 @@ trait CanBeFollowBehavior
             ->update(['accepted_at' => now()]);
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return mixed
+     */
     public function rejectFollow(Model $user)
     {
         return $this->followable()
@@ -59,6 +85,11 @@ trait CanBeFollowBehavior
             ->update(['rejected_at' => now()]);
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return |null
+     */
     public function removeFollower(Model $user)
     {
         $relation = $this->followable()
@@ -76,6 +107,11 @@ trait CanBeFollowBehavior
         return null;
     }
 
+    /**
+     * @param  Collection  $collection
+     *
+     * @return mixed
+     */
     public function removeManyFollowers(Collection $collection)
     {
         $collection->each(

@@ -10,11 +10,20 @@
 
 namespace SebastianKennedy\LaravelFollow\Behaviors;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Trait CanFollowBehavior
+ *
+ * @package SebastianKennedy\LaravelFollow\Behaviors
+ */
 trait CanFollowBehavior
 {
+    /**
+     * @return mixed
+     */
     public function followings()
     {
         return $this->belongsToMany(
@@ -25,6 +34,9 @@ trait CanFollowBehavior
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function follows()
     {
         return $this->hasMany(
@@ -34,6 +46,11 @@ trait CanFollowBehavior
         );
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return bool
+     */
     public function hasFollowed(Model $user)
     {
         if ($this->relationLoaded('followings')) {
@@ -45,6 +62,11 @@ trait CanFollowBehavior
                 ->count() > 0;
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return Application|mixed|null
+     */
     public function follow(Model $user)
     {
         if (!$this->hasFollowed($user)) {
@@ -60,6 +82,11 @@ trait CanFollowBehavior
         return null;
     }
 
+    /**
+     * @param  Collection  $collection
+     *
+     * @return mixed
+     */
     public function followMany(Collection $collection)
     {
         $collection->each(
@@ -71,6 +98,11 @@ trait CanFollowBehavior
         return $this->followings;
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return bool|null
+     */
     public function unFollow(Model $user)
     {
         $relation = $this->follows()
@@ -88,6 +120,11 @@ trait CanFollowBehavior
         return null;
     }
 
+    /**
+     * @param  Collection  $collection
+     *
+     * @return mixed
+     */
     public function unFollowMany(Collection $collection)
     {
         $collection->each(
@@ -99,6 +136,11 @@ trait CanFollowBehavior
         return $this->followings;
     }
 
+    /**
+     * @param  Model  $user
+     *
+     * @return Application|mixed|null
+     */
     public function toggleFollow(Model $user)
     {
         return $this->hasFollowed($user) ? $this->unFollow($user) : $this->follow($user);
