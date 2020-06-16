@@ -14,9 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * Trait CanBeFollowBehavior
- *
- * @package SebastianKennedy\LaravelFollow\Behaviors
+ * Trait CanBeFollowBehavior.
  */
 trait CanBeFollowBehavior
 {
@@ -62,8 +60,6 @@ trait CanBeFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return mixed
      */
     public function acceptFollow(Model $user)
@@ -88,7 +84,7 @@ trait CanBeFollowBehavior
     /**
      * @param  Model  $user
      *
-     * @return |null
+     * @return mixed
      */
     public function removeFollower(Model $user)
     {

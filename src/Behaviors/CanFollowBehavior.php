@@ -15,9 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * Trait CanFollowBehavior
- *
- * @package SebastianKennedy\LaravelFollow\Behaviors
+ * Trait CanFollowBehavior.
  */
 trait CanFollowBehavior
 {
@@ -47,8 +45,6 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return bool
      */
     public function hasFollowed(Model $user)
@@ -63,9 +59,7 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
-     * @return Application|mixed|null
+     * @return mixed
      */
     public function follow(Model $user)
     {
@@ -83,8 +77,6 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Collection  $collection
-     *
      * @return mixed
      */
     public function followMany(Collection $collection)
@@ -96,6 +88,29 @@ trait CanFollowBehavior
         );
 
         return $this->followings;
+    }
+
+    /**
+     * @param  Model  $user
+     *
+     * @return Application|mixed
+     */
+    public function specialFollow(Model $user)
+    {
+        if (!$this->hasFollowed($user)) {
+            $follow = app(config('follow.model'));
+            $follow->{config('follow.follower_key')} = $this->getKey();
+            $follow->{config('follow.following_key')} = $user->getKey();
+            $follow->special_followed_at = now();
+            $this->follows()->save($follow);
+            $this->refresh();
+
+            return $follow;
+        }
+
+        return $this->follows()
+            ->where(config('follow.following_key'), $user->getKey())
+            ->update(['special_followed_at' => now()]);
     }
 
     /**
@@ -139,7 +154,27 @@ trait CanFollowBehavior
     /**
      * @param  Model  $user
      *
-     * @return Application|mixed|null
+     * @return mixed
+     */
+    public function cancelSpecialFollow(Model $user)
+    {
+        $relation = $this->follows()
+            ->where(config('follow.follower_key'), $this->getKey())
+            ->where(config('follow.following_key'), $user->getKey())
+            ->whereNotNull('special_followed_at')
+            ->first();
+
+        if ($relation) {
+            return $relation->update(['special_followed_at' => now()]);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  Model  $user
+     *
+     * @return mixed
      */
     public function toggleFollow(Model $user)
     {
