@@ -13,9 +13,7 @@ namespace SebastianKennedy\LaravelFollow;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class FollowServiceProvider
- *
- * @package SebastianKennedy\LaravelFollow
+ * Class FollowServiceProvider.
  */
 class FollowServiceProvider extends ServiceProvider
 {
