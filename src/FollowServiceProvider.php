@@ -16,16 +16,16 @@ class FollowServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishes([dirname(__DIR__) . '/config/follow.php' => config_path('follow.php')], 'config');
-        $this->publishes([dirname(__DIR__) . '/migrations/' => database_path('migrations')], 'migrations');
+        $this->publishes([dirname(__DIR__).'/config/follow.php' => config_path('follow.php')], 'config');
+        $this->publishes([dirname(__DIR__).'/migrations/' => database_path('migrations')], 'migrations');
 
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(dirname(__DIR__) . '/migrations/');
+            $this->loadMigrationsFrom(dirname(__DIR__).'/migrations/');
         }
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__) . '/config/follow.php', 'follow');
+        $this->mergeConfigFrom(dirname(__DIR__).'/config/follow.php', 'follow');
     }
 }

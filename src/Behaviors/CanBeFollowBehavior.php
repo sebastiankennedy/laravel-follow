@@ -44,8 +44,6 @@ trait CanBeFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return bool
      */
     public function isFollowedBy(Model $user)
@@ -70,8 +68,6 @@ trait CanBeFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return mixed
      */
     public function rejectFollow(Model $user)
@@ -82,8 +78,6 @@ trait CanBeFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return mixed
      */
     public function removeFollower(Model $user)
@@ -104,8 +98,6 @@ trait CanBeFollowBehavior
     }
 
     /**
-     * @param  Collection  $collection
-     *
      * @return mixed
      */
     public function removeManyFollowers(Collection $collection)

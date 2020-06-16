@@ -10,7 +10,6 @@
 
 namespace SebastianKennedy\LaravelFollow\Behaviors;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -91,9 +90,7 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
-     * @return Application|mixed
+     * @return mixed
      */
     public function specialFollow(Model $user)
     {
@@ -114,8 +111,6 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return bool|null
      */
     public function unFollow(Model $user)
@@ -136,8 +131,6 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Collection  $collection
-     *
      * @return mixed
      */
     public function unFollowMany(Collection $collection)
