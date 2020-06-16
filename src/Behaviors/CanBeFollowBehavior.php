@@ -20,8 +20,8 @@ trait CanBeFollowBehavior
         return $this->belongsToMany(
             config('auth.providers.users.model'),
             config('follow.table_name'),
-            config('follow.following_id'),
-            config('follow.follower_id')
+            config('follow.following_key'),
+            config('follow.follower_key')
         );
     }
 
