@@ -11,6 +11,7 @@
 namespace SebastianKennedy\LaravelFollow\Behaviors;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 trait CanFollowBehavior
 {
@@ -55,6 +56,17 @@ trait CanFollowBehavior
         return null;
     }
 
+    public function followMany(Collection $collection)
+    {
+        $collection->each(
+            function (Model $model) {
+                $this->follow($model);
+            }
+        );
+
+        return $this->followings;
+    }
+
     public function unFollow(Model $user)
     {
         $relation = $this->follows()
@@ -70,6 +82,17 @@ trait CanFollowBehavior
         }
 
         return null;
+    }
+
+    public function unFollowMany(Collection $collection)
+    {
+        $collection->each(
+            function (Model $model) {
+                $this->unFollow($model);
+            }
+        );
+
+        return $this->followings;
     }
 
     public function toggleFollow(Model $model)
