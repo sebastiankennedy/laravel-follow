@@ -11,6 +11,7 @@
 namespace SebastianKennedy\LaravelFollow\Behaviors;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 trait CanBeFollowBehavior
 {
@@ -38,5 +39,47 @@ trait CanBeFollowBehavior
         return ($this->relationLoaded('followable') ? $this->followable : $this->followable())
                 ->where(config('follow.follower_key'), $model->getKey())
                 ->count() > 0;
+    }
+
+    public function acceptFollow(Model $model)
+    {
+        return $this->followable()
+            ->where(config('follow.follower_key'), $model->getKey())
+            ->update(['accepted_at' => now()]);
+    }
+
+    public function rejectFollow(Model $model)
+    {
+        return $this->followable()
+            ->where(config('follow.follower_key'), $model->getKey())
+            ->update(['rejected_at' => now()]);
+    }
+
+    public function removeFollower(Model $model)
+    {
+        $relation = $this->followable()
+            ->where(config('follow.follower_key'), $model->getKey())
+            ->where(config('follow.following_key'), $this->getKey())
+            ->first();
+
+        if ($relation) {
+            $result = $relation->delete();
+            $this->refresh();
+
+            return $result;
+        }
+
+        return null;
+    }
+
+    public function removeManyFollowers(Collection $collection)
+    {
+        $collection->each(
+            function (Model $model) {
+                $this->removeFollower($model);
+            }
+        );
+
+        return $this->refresh();
     }
 }
