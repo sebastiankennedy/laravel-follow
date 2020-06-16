@@ -14,20 +14,29 @@ use Illuminate\Database\Eloquent\Model;
 
 trait CanBeFollowBehavior
 {
-    public function follows()
+    public function followers()
     {
-        return $this->hasMany(config('follow.model'), config('follow.following_key'), $this->getKeyName());
+        return $this->belongsToMany(
+            config('auth.providers.users.model'),
+            config('follow.table_name'),
+            config('follow.following_id'),
+            config('follow.follower_id')
+        );
+    }
+
+    public function followable()
+    {
+        return $this->hasMany(
+            config('follow.model'),
+            config('follow.following_key'),
+            $this->getKeyName()
+        );
     }
 
     public function isFollowedBy(Model $model)
     {
-        return ($this->relationLoaded('follows') ? $this->follows : $this->follows())
-                ->where(config('follow.foreign_morph_to_id'), $model->getKey())
-                ->where(config('follow.foreign_morph_to_type'), $model->getMorphClass())
+        return ($this->relationLoaded('followable') ? $this->followable : $this->followable())
+                ->where(config('follow.follower_key'), $model->getKey())
                 ->count() > 0;
-    }
-
-    public function followers()
-    {
     }
 }
