@@ -34,10 +34,14 @@ trait CanFollowBehavior
         );
     }
 
-    public function hasFollowed(Model $model)
+    public function hasFollowed(Model $user)
     {
+        if ($this->relationLoaded('followings')) {
+            return $this->followings->contains($user);
+        }
+
         return ($this->relationLoaded('follows') ? $this->follows : $this->follows())
-                ->where(config('follow.following_key'), $model->getKey())
+                ->where(config('follow.following_key'), $user->getKey())
                 ->count() > 0;
     }
 
@@ -59,8 +63,8 @@ trait CanFollowBehavior
     public function followMany(Collection $collection)
     {
         $collection->each(
-            function (Model $model) {
-                $this->follow($model);
+            function (Model $user) {
+                $this->follow($user);
             }
         );
 
@@ -87,16 +91,16 @@ trait CanFollowBehavior
     public function unFollowMany(Collection $collection)
     {
         $collection->each(
-            function (Model $model) {
-                $this->unFollow($model);
+            function (Model $user) {
+                $this->unFollow($user);
             }
         );
 
         return $this->followings;
     }
 
-    public function toggleFollow(Model $model)
+    public function toggleFollow(Model $user)
     {
-        return $this->hasFollowed($model) ? $this->unFollow($model) : $this->follow($model);
+        return $this->hasFollowed($user) ? $this->unFollow($user) : $this->follow($user);
     }
 }

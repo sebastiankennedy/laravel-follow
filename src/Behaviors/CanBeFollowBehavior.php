@@ -34,31 +34,35 @@ trait CanBeFollowBehavior
         );
     }
 
-    public function isFollowedBy(Model $model)
+    public function isFollowedBy(Model $user)
     {
+        if ($this->relationLoaded('followers')) {
+            return $this->followers->contains($user);
+        }
+
         return ($this->relationLoaded('followable') ? $this->followable : $this->followable())
-                ->where(config('follow.follower_key'), $model->getKey())
+                ->where(config('follow.follower_key'), $user->getKey())
                 ->count() > 0;
     }
 
-    public function acceptFollow(Model $model)
+    public function acceptFollow(Model $user)
     {
         return $this->followable()
-            ->where(config('follow.follower_key'), $model->getKey())
+            ->where(config('follow.follower_key'), $user->getKey())
             ->update(['accepted_at' => now()]);
     }
 
-    public function rejectFollow(Model $model)
+    public function rejectFollow(Model $user)
     {
         return $this->followable()
-            ->where(config('follow.follower_key'), $model->getKey())
+            ->where(config('follow.follower_key'), $user->getKey())
             ->update(['rejected_at' => now()]);
     }
 
-    public function removeFollower(Model $model)
+    public function removeFollower(Model $user)
     {
         $relation = $this->followable()
-            ->where(config('follow.follower_key'), $model->getKey())
+            ->where(config('follow.follower_key'), $user->getKey())
             ->where(config('follow.following_key'), $this->getKey())
             ->first();
 
@@ -75,11 +79,11 @@ trait CanBeFollowBehavior
     public function removeManyFollowers(Collection $collection)
     {
         $collection->each(
-            function (Model $model) {
-                $this->removeFollower($model);
+            function (Model $user) {
+                $this->removeFollower($user);
             }
         );
 
-        return $this->refresh();
+        return $this->followers;
     }
 }
