@@ -12,6 +12,11 @@ namespace SebastianKennedy\LaravelFollow;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class FollowServiceProvider
+ *
+ * @package SebastianKennedy\LaravelFollow
+ */
 class FollowServiceProvider extends ServiceProvider
 {
     public function boot()

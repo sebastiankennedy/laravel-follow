@@ -145,8 +145,6 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return mixed
      */
     public function cancelSpecialFollow(Model $user)
@@ -165,8 +163,6 @@ trait CanFollowBehavior
     }
 
     /**
-     * @param  Model  $user
-     *
      * @return mixed
      */
     public function toggleFollow(Model $user)
