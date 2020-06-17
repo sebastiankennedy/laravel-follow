@@ -8,4 +8,6 @@ composer.lock
 .php_cs.cache
 cghooks.lock
 coverage.xml
+coverage.clover
+ocular.phar
 

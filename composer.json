@@ -55,7 +55,7 @@
             "cghooks add --ignore-lock",
             "cghooks update"
         ],
-        "test": "vendor/bin/phpunit --colors=always --coverage-clover=./coverage.xml",
+        "test": "vendor/bin/phpunit --colors=always --coverage-clover=coverage.clover",
         "cghooks": "vendor/bin/cghooks",
         "fix-code-style": "php-cs-fixer fix --using-cache=no --config=.php_cs --ansi",
         "check-code-style": "php-cs-fixer fix --using-cache=no --diff --config=.php_cs --dry-run --ansi"

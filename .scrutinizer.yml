@@ -1,0 +1,9 @@
+build:
+    nodes:
+        coverage:
+            tests:
+                override:
+                    - command: ./vendor/bin/phpunit --colors=always --coverage-clover=./coverage.xml
+                      coverage:
+                          file: ./coverage.xml
+                          format: clover
