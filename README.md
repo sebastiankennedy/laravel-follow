@@ -1,6 +1,14 @@
 <h1 align="center"> laravel-follow </h1>
 
-<p align="center"> .</p>
+<p align="center">
+<a href="https://travis-ci.org/sebastiankennedy/laravel-follow"><img src="https://travis-ci.org/sebastiankennedy/laravel-follow.svg?branch=master" alt="Build Status"></a>
+<a href="https://packagist.org/packages/sebastian-kennedy/laravel-follow"><img src="https://poser.pugx.org/sebastian-kennedy/laravel-follow/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/sebastian-kennedy/laravel-follow"><img src="https://poser.pugx.org/sebastian-kennedy/laravel-follow/v/unstable.svg" alt="Latest Unstable Version"></a>
+<a href="https://scrutinizer-ci.com/g/sebastiankennedy/laravel-follow/?branch=master"><img src="https://scrutinizer-ci.com/g/sebastiankennedy/laravel-follow/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
+<a href="https://scrutinizer-ci.com/g/sebastiankennedy/laravel-follow/?branch=master"><img src="https://scrutinizer-ci.com/g/sebastiankennedy/laravel-follow/badges/coverage.png?b=master" alt="Code Coverage"></a>
+<a href="https://packagist.org/packages/sebastian-kennedy/laravel-follow"><img src="https://poser.pugx.org/sebastian-kennedy/laravel-follow/downloads" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/sebastian-kennedy/laravel-follow"><img src="https://poser.pugx.org/sebastian-kennedy/laravel-follow/license" alt="License"></a>
+</p>
 
 
 ## Installing
