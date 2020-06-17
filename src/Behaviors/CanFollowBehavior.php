@@ -105,7 +105,7 @@ trait CanFollowBehavior
             return $follow;
         }
 
-        return $this->follows()
+        return (bool) $this->follows()
             ->where(config('follow.following_key'), $user->getKey())
             ->update(['special_followed_at' => now()]);
     }

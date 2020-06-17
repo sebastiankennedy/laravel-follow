@@ -62,7 +62,11 @@ trait CanBeFollowBehavior
      */
     public function acceptFollow(Model $user)
     {
-        return $this->followable()
+        if (!$this->isFollowedBy($user)) {
+            return null;
+        }
+
+        return (bool) $this->followable()
             ->where(config('follow.follower_key'), $user->getKey())
             ->update(['accepted_at' => now()]);
     }
@@ -72,7 +76,11 @@ trait CanBeFollowBehavior
      */
     public function rejectFollow(Model $user)
     {
-        return $this->followable()
+        if (!$this->isFollowedBy($user)) {
+            return null;
+        }
+
+        return (bool) $this->followable()
             ->where(config('follow.follower_key'), $user->getKey())
             ->update(['rejected_at' => now()]);
     }

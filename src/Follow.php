@@ -23,6 +23,16 @@ class Follow extends Model
     /**
      * @var array
      */
+    protected $fillable = [
+        'follower_id',
+        'following_id',
+        'accepted_at',
+        'rejected_at',
+        'special_followed_at',
+    ];
+    /**
+     * @var array
+     */
     protected $dispatchesEvents = [
         'created' => FollowedEvent::class,
         'deleted' => UnFollowedEvent::class,
