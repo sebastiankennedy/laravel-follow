@@ -1,12 +1,5 @@
 build:
     nodes:
-        coverage:
-            tests:
-                override:
-                    -   command: ./vendor/bin/phpunit --colors=always --coverage-clover=./coverage.xml
-                        coverage:
-                            file: ./coverage.xml
-                            format: clover
         analysis:
             project_setup:
                 override:
@@ -17,6 +10,13 @@ build:
                     -   command: phpcs-run
                         use_website_config: true
         tests: true
+        coverage:
+            tests:
+                override:
+                    -   command: ./vendor/bin/phpunit --colors=always --coverage-clover=./coverage.xml
+                        coverage:
+                            file: ./coverage.xml
+                            format: clover
 filter:
     excluded_paths:
         - 'tests/*'
