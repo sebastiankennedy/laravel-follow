@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the sebastian-kennedy/laravel-follow.
+ *
+ * (c) SebastianKennedy <sebastiankennedy@foxmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace SebastianKennedy\LaravelFollow\Tests;
 
 use Illuminate\Support\Collection;
@@ -29,7 +37,6 @@ class CanFollowBehaviorTest extends LaravelFollowTest
         $user3 = User::create(['name' => 'User 3']);
         $user1->follow($user2);
         $user1->follow($user3);
-
 
         $this->assertInstanceOf(Collection::class, $user1->follows);
         $this->assertSame(2, $user1->follows->count());
