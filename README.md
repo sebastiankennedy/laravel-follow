@@ -1,7 +1,5 @@
 ## Laravel Follow
 
-User follow feature for laravel application.
-
 <p>
 <a href="https://travis-ci.org/sebastiankennedy/laravel-follow"><img src="https://travis-ci.org/sebastiankennedy/laravel-follow.svg?branch=master" alt="Build Status"></a>
 <a href="https://packagist.org/packages/sebastian-kennedy/laravel-follow"><img src="https://poser.pugx.org/sebastian-kennedy/laravel-follow/v/stable.svg" alt="Latest Stable Version"></a>
@@ -14,7 +12,7 @@ User follow feature for laravel application.
 </p>
 
 <p>
-:busts_in_silhouette: User follow feature for laravel application.
+User follow feature for laravel application.
 </p>
 
 ## Version Matrix
