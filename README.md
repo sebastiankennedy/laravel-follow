@@ -1,4 +1,4 @@
-## >Laravel Follow
+## Laravel Follow
 
 <p>
 <a href="https://travis-ci.org/sebastiankennedy/laravel-follow"><img src="https://travis-ci.org/sebastiankennedy/laravel-follow.svg?branch=master" alt="Build Status"></a>
@@ -68,6 +68,8 @@ class User extends Model
 }
 ```
 
+## CanFollowBehavior
+
 #### Get list of followings
 ```php
 $user = User::find(1);
@@ -95,7 +97,98 @@ $user2 = User::find(2);
 $user1->follow($user2);
 ```
 
-#### Follow
+#### Follow many users
+```php
+$user1 = User::find(1);
+$users = User::whereIn('id', [2, 3, 4])->get();
+$user1->followMany($users);
+```
+
+#### Special follow a user
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->specialFollow($user2);
+```
+
+#### Unfollow a user
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->unFollow($user2);
+```
+
+#### Unfollow many users
+```php
+$user1 = User::find(1);
+$users = User::whereIn('id', [2, 3, 4])->get();
+$user1->unFollowMany($users);
+```
+
+#### Cancel special follow a user
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->cancelSpecialFollow($user2);
+```
+
+#### Toggle follow a user
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->toggleFollow($user2);
+```
+
+## CanBeFollowBehavior
+
+#### Get list of followers
+```php
+$user1 = User::find(1);
+$user1->followers;
+```
+
+#### Get list of follow relationships
+```php
+$user1 = User::find(1);
+$user1->follwable;
+```
+
+#### Determine if a user is followed By the other user
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->isFollowedBy($user2);
+```
+
+#### Accept a user follow request
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user2->follow($user1);
+$user1->acceptFollow($user2);
+```
+
+#### Reject a user follow request
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->follow($user2);
+$user2->rejectFollow($user1);
+```
+
+#### Remove a follower
+```php
+$user1 = User::find(1);
+$user2 = User::find(2);
+$user1->removeFollower($user2);
+```
+
+#### Remove many followers
+```php
+$user1 = User::find(1);
+$users = User::whereIn('id', [2, 3, 4])->get();
+$user1->removeManyFollowers($users);
+```
 
 ## License
 
